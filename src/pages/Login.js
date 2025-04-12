@@ -6,10 +6,11 @@ import axios from 'axios';
 function AdminLogin() {
   const [data, setData] = useState({
     email: "",
-    password: ""
+    password: "",
+    department: ""
   });
 
-  const navigate = useNavigate(); // Assuming you need it for later
+  const navigate = useNavigate();
 
   const collecting = (e) => {
     const { name, value } = e.target;
@@ -22,41 +23,43 @@ function AdminLogin() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-        const response = await axios.post("http://localhost:5000/api/admin/adminlogin", {
-            email: data.email,
-            password: data.password
-        });
+      const response = await axios.post("http://localhost:5000/api/admin/adminlogin", {
+        email: data.email,
+        password: data.password,
+        department:data.department
+      });
 
-        const { token, role } = response.data;
+      // Destructure token, role, department from response
+      const { token, role, department } = response.data;
 
-        // Save token & role
-        localStorage.setItem("token", token);
-        localStorage.setItem("role", role);
+      // Save to localStorage
+      localStorage.setItem("token", token);
+      localStorage.setItem("role", role);
+      localStorage.setItem("userDepartment", department); // ✅ save department
 
-        // Redirect based on role
-        switch (role.toLowerCase()) {
-            case 'principal':
-                navigate("/dashboard/principal");
-                break;
-            case 'hod':
-                navigate("/dashboard/hod");
-                break;
-            case 'ca':
-                navigate("/dashboard/ca");
-                break;
-            case 'admin':
-                navigate("/dashboard/admin");
-                break;
-            default:
-                alert("Unknown role. Access denied.");
-        }
+      // Redirect based on role
+      switch (role.toLowerCase()) {
+        case 'principal':
+          navigate("/dashboard/principal");
+          break;
+        case 'hod':
+          navigate("/dashboard/hod");
+          break;
+        case 'staff':
+          navigate("/dashboard/ca");
+          break;
+        case 'admin':
+          navigate("/dashboard/admin");
+          break;
+        default:
+          alert("Unknown role. Access denied.");
+      }
+
     } catch (error) {
-        console.error("Login Failed:", error.response?.data || error.message);
-        alert(error.response?.data?.message || "Login failed");
+      console.error("Login Failed:", error.response?.data || error.message);
+      alert(error.response?.data?.message || "Login failed");
     }
-};
-  
-  
+  };
 
   return (
     <Container maxWidth="sm">
