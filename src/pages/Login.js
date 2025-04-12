@@ -62,7 +62,7 @@ function AdminLogin() {
     <Container maxWidth="sm">
       <Box sx={{ mt: 8 }}>
         <Typography variant="h4" gutterBottom>
-          Admin Login
+          Login
         </Typography>
         <form onSubmit={handleSubmit}>
           <TextField
