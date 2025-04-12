@@ -5,6 +5,7 @@ function CADashboard() {
   return (
     <Container>
       <Typography variant="h4">CA Dashboard</Typography>
+      
     </Container>
   );
 }
