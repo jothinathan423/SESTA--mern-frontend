@@ -6,6 +6,7 @@ import axios from 'axios';
 
 const columns = [
     { field: 'id', headerName: 'Student ID', width: 130 },
+    { field: 'name', headerName: 'Student Name', width: 130 },
     { field: 'department', headerName: 'Department', width: 120 },
     { field: 'batch', headerName: 'Batch', width: 130 },
     { field: 'gender', headerName: 'Gender', width: 100 },
@@ -26,6 +27,7 @@ export default function AllStudentDatatable() {
                 const response = await axios.get('http://localhost:5000/api/admin/getallstudents');
                 const formattedData = response.data.map((student, index) => ({
                     id: student.id || `ID${index + 1}`,
+                    name : student.name,
                     department: student.department,
                     batch: student.batch,
                     gender: student.gender,
