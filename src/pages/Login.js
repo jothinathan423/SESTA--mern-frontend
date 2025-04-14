@@ -1,3 +1,4 @@
+// pages/Login.js
 import React, { useState } from 'react';
 import { TextField, Button, Container, Typography, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
@@ -26,18 +27,17 @@ function AdminLogin() {
       const response = await axios.post("http://localhost:5000/api/admin/adminlogin", {
         email: data.email,
         password: data.password,
-        department:data.department
+        department: data.department
       });
 
-      // Destructure token, role, department from response
       const { token, role, department } = response.data;
 
-      // Save to localStorage
-      localStorage.setItem("token", token);
-      localStorage.setItem("role", role);
-      localStorage.setItem("userDepartment", department); // ✅ save department
+      // ✅ Save to sessionStorage instead of localStorage
+      sessionStorage.setItem("token", token);
+      sessionStorage.setItem("role", role);
+      sessionStorage.setItem("userDepartment", department);
+      sessionStorage.setItem("email", data.email);
 
-      // Redirect based on role
       switch (role.toLowerCase()) {
         case 'principal':
           navigate("/dashboard/principal");

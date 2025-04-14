@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from '../components/navbar';
 import LeftSidebar from '../components/LeftSidebar';
 import CaForm from '../components/caForm';
 
@@ -19,7 +18,7 @@ const HodDashboard = () => {
   return (
     <div>
       {/* Top Navbar */}
-      <Navbar email={email} />
+ 
 
       {/* Sidebar */}
       <LeftSidebar onAddCaClick={() => setShowForm(true)} />
