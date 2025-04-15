@@ -30,13 +30,15 @@ function AdminLogin() {
         department: data.department
       });
 
-      const { token, role, department } = response.data;
+      const { token, role, department,id } = response.data;
 
       // ✅ Save to sessionStorage instead of localStorage
       sessionStorage.setItem("token", token);
       sessionStorage.setItem("role", role);
       sessionStorage.setItem("userDepartment", department);
       sessionStorage.setItem("email", data.email);
+      sessionStorage.setItem("id", id);
+
 
       switch (role.toLowerCase()) {
         case 'principal':
