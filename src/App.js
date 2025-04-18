@@ -8,6 +8,7 @@ import CADashboard from './pages/CADashboard';
 import AdminForm from './components/LoginForm';
 import Navbar from './components/navbar';
 
+
 function App() {
   return (
     <Router>
@@ -37,6 +38,7 @@ function MainLayout() {
         <Route path="/dashboard/hod" element={<HODDashboard />} />
         <Route path="/dashboard/ca" element={<CADashboard />} />
         <Route path="/adminform" element={<AdminForm />} />
+
       </Routes>
     </>
   );

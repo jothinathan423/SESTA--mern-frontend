@@ -1,70 +1,35 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import AddStudentForm from '../components/AddStudentForm';
+import ViewStudents from '../components/ViewStudents';
+import LeftSidebar2 from '../components/LeftSidebar2';
+import { Box } from '@mui/material';
 
+const CADashboard = () => {
+  const [activeTab, setActiveTab] = useState('');
 
-const AddStudentForm = () => {
-  const [studentData, setStudentData] = useState({
-    name: '',
-    username: '',
-    password: '',
-    role: 'student',
-    phonenumber: '',
-    department: '',
-    id: '',
-    batch: '',
-    gender: '',
-    year: '',
-    section: ''
-  });
-
-  const handleChange = (e) => {
-    setStudentData({ ...studentData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await axios.post('http://localhost:5000/api/student/insert', studentData);
-      alert(res.data.message || "Student added!");
-
-      // Resetting form
-      setStudentData({
-        name: '',
-        username: '',
-        password: '',
-        role: 'student',
-        phonenumber: '',
-        department: '',
-        id: '',
-        batch: '',
-        gender: '',
-        year: '',
-        section: ''
-      });
-    } catch (err) {
-      console.error(err);
-      alert("Failed to add student");
-    }
+  const handleSidebarClick = (tab) => {
+    setActiveTab(tab);
   };
 
   return (
-    <div className="container">
-      <h1>ADD STUDENTS</h1>
-      <form onSubmit={handleSubmit}>
-        <input name="name" placeholder="Name" value={studentData.name} onChange={handleChange} />
-        <input name="username" placeholder="Username" value={studentData.username} onChange={handleChange} />
-        <input name="password" type="password" placeholder="Password" value={studentData.password} onChange={handleChange} />
-        <input name="phonenumber" placeholder="Phone Number" value={studentData.phonenumber} onChange={handleChange} />
-        <input name="department" placeholder="Department" value={studentData.department} onChange={handleChange} />
-        <input name="id" placeholder="ID" value={studentData.id} onChange={handleChange} />
-        <input name="batch" placeholder="Batch" value={studentData.batch} onChange={handleChange} />
-        <input name="gender" placeholder="Gender" value={studentData.gender} onChange={handleChange} />
-        <input name="year" placeholder="Year" value={studentData.year} onChange={handleChange} />
-        <input name="section" placeholder="Section" value={studentData.section} onChange={handleChange} />
-        <button type="submit">Add Student</button>
-      </form>
-    </div>
+    <Box sx={{ display: 'flex' }}>
+      <LeftSidebar2
+        role="ca"
+        onAddStudentClick={() => handleSidebarClick('add')}
+        onViewStudentClick={() => handleSidebarClick('view')}
+      />
+      <Box sx={{ flexGrow: 1, p: 3 }}>
+        {activeTab === 'add' && <AddStudentForm />}
+        {activeTab === 'view' && <ViewStudents />}
+        {activeTab === '' && (
+          <div style={{ textAlign: 'center', marginTop: '100px', color: '#aaa' }}>
+            <h2>Welcome CA!</h2>
+            <p>Select an action from the sidebar.</p>
+          </div>
+        )}
+      </Box>
+    </Box>
   );
 };
 
-export default AddStudentForm;
+export default CADashboard;
