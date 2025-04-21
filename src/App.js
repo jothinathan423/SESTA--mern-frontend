@@ -7,6 +7,14 @@ import HODDashboard from './pages/HODDashboard';
 import CADashboard from './pages/CADashboard';
 import AdminForm from './components/LoginForm';
 import Navbar from './components/navbar';
+import ManageStaff from './components/ManageStaff';
+import DashboardLayout from './components/DashboardLayout';
+import StaffList from './components/StaffList'; 
+
+// ✅ Use only ONE StaffRegistration (from /pages/admin/)
+import StaffRegistration from './pages/admin/StaffRegistration';
+// ✅ If using the full StaffPage version with search/edit/delete, create this
+import StaffRegistrationPage from './pages/StaffRegistrationPage';
 
 function App() {
   return (
@@ -37,6 +45,16 @@ function MainLayout() {
         <Route path="/dashboard/hod" element={<HODDashboard />} />
         <Route path="/dashboard/ca" element={<CADashboard />} />
         <Route path="/adminform" element={<AdminForm />} />
+        <Route path="/dashboard/admin" element={<DashboardLayout />} />
+        <Route path="/manage-staff" element={<ManageStaff />} />
+
+        {/* Option 1: basic staff table */}
+        <Route path="/staff-registration" element={<StaffRegistrationPage />} />
+
+        {/* Option 2: full version with edit/delete/search */}
+        {/* <Route path="/staff-registration" element={<StaffRegistrationPage />} /> */}
+
+        <Route path="/admin/staff" element={<StaffList />} />
       </Routes>
     </>
   );

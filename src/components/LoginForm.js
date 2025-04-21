@@ -43,7 +43,6 @@ const AdminRegisterForm = () => {
         <option value="">Select Gender</option>
         <option value="male">Male</option>
         <option value="female">Female</option>
-        <option value="other">Other</option>
       </select>
 
       <button type="submit">Register</button>
